@@ -1,0 +1,190 @@
+<html>
+
+<head>
+    <title>Chrome Step Recorder</title>
+    <style>
+        table#steps,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            word-wrap: break-word
+        }
+
+        td {
+            max-width: 500px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        table#control td:hover {
+            background-color: rgb(255, 255, 255);
+        }
+
+        table#steps,
+        table#control {
+            width: 100%;
+        }
+
+    </style>
+    <style>
+        .slider.round {
+            border-radius: 25px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 25px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(32px);
+            -ms-transform: translateX(32px);
+            transform: translateX(32px);
+        }
+
+        input#StartStop:checked~div.StartStopOff,
+        input#StartStop:not(checked)~div.StartStopOn {
+            display: none;
+        }
+        input#StartStop:not(checked)~div.StartStopOff,
+        input#StartStop:checked~div.StartStopOn {
+            display: table-cell;
+        }
+
+        div.StartStopOff, div.StartStopOn{
+            font-size: 12px;
+            vertical-align: bottom;
+            text-align: center;
+            width: 100%;
+        }
+        .StartStopControl{
+            height: 65px;
+            text-align: center;
+        }
+        .StartStopOn{
+            color: red;
+        }
+    </style>
+    <style>
+        body {
+            min-width: 770px;
+        }
+    </style>
+    <style>
+        img {
+            height: 180px;
+        }
+    </style>
+    <style>
+        td.tabInfo,
+        td.identifier,
+        input.stepCheckbox {
+            display: none;
+        }
+    </style>
+    <style>
+        img#shiftLeftLogo{
+            float: right;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+            height: auto;
+        }
+    </style>
+    <style>
+        textarea.annotation{
+            width: 100%; 
+            max-width: 100%; 
+            color:navy;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        div.annotation{
+            width: 100%;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="control">
+        <tr>
+            <td width="200px"><label><b>Open in new tab for more info and to save results</b></label></td>
+            <td class="StartStopControl">
+                <label class="switch">
+                    <input type="checkbox" id="StartStop" checked>
+                    <span class="slider round"></span>
+                    <br><br>
+                    <div class="StartStopOff">Turned Off</div>
+                    <div class="StartStopOn">Recording</div>
+                </label>
+            </td>
+            <td><button id="NewTab">Open Detailed Results Tab</button></td>
+            <td><button id="ShowResults">Peek at Steps</button></td>
+            <td><button id="clearSteps">Clear Steps</button></td>
+            <td><button id="CaptureNow">Capture Current State (Ctrl+Shit+1)</button></td>
+        </tr>
+    </table>
+    <br>
+    <span>Review and customise keyboard shortcuts here: 
+    <br> chrome://extensions/shortcuts
+    </span>
+    <img id="shiftLeftLogo" src="/Shift Left Logo 2020_1.jpg">
+    <br>
+    <table id="steps"></table>
+    <script src="/ProcessResults.js"></script>
+    <script src="/storage.js"></script>
+    <script src="/popup.js"></script>
+</body>
+</html>
