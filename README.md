@@ -1,3 +1,4 @@
 # StepRecorder
 A local step recording chrome extension
-https://trello.com/b/Mzubb1tx/soap-suite
+
+https://trello.com/b/RmFp1CIx/step-recording-chrome-extension
